@@ -54,10 +54,12 @@ const CadastroPessoa = () => {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} >
-                    <Button variant="contained" color="primary" className="confirmar">Confirmar</Button>
-                    <Button variant="contained" color="secondary" className="cancelar">Cancelar</Button>
-                </Grid>
+                <div className={style.confirmarExcluir}>
+                    <Grid item xs={12} >
+                        <Button variant="contained" color="primary" className="confirmar">Confirmar</Button>
+                        <Button variant="contained" color="secondary" className="cancelar">Cancelar</Button>
+                    </Grid>
+                </div>
             </Grid>
         </div>
     </form>

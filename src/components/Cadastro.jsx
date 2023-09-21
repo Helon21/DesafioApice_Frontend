@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Cadastro = () => {
     const [cadastroAnchor, setCadastroAnchorEl] = useState(null);
@@ -11,6 +12,7 @@ const Cadastro = () => {
     const handleMenuClose = () => {
         setCadastroAnchorEl(null);
     };
+
 
     return (
         <div>
@@ -29,9 +31,9 @@ const Cadastro = () => {
                 open={Boolean(cadastroAnchor)}
                 onClose={handleMenuClose}
             >
-                <MenuItem onClick={handleMenuClose}>Bairro</MenuItem>
-                <MenuItem onClick={handleMenuClose}>Cidade</MenuItem>
-                <MenuItem onClick={handleMenuClose}>Pessoa</MenuItem>
+                <MenuItem component={Link} to="/cadastro-bairro" onClick={handleMenuClose}>Bairro</MenuItem>
+                <MenuItem component={Link} to="/cadastro-cidade" onClick={handleMenuClose}>Cidade</MenuItem>
+                <MenuItem component={Link} to="/cadastro-pessoa" onClick={handleMenuClose}>Pessoa</MenuItem>
                 <MenuItem onClick={handleMenuClose}>Produtos</MenuItem>
             </Menu>
         </div>

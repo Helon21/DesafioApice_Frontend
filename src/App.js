@@ -1,12 +1,24 @@
-import logo from './logo.svg';
+
 import React from 'react';
 import './App.css';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
+import CadastroPessoa from './pages/Cadastros/Cadastro-pessoa/CadastroPessoa';
+import CadastroCidade from './pages/Cadastros/Cadastro-cidade/CadastroCidade';
+import CadastroBairro from './pages/Cadastros/Cadastro-bairro/CadastroBairro';
+
 
 function App() {
   return (
-    <Home/>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path='/' Component={() => <Home/>}/>
+        <Route path="/cadastro-pessoa" element={<CadastroPessoa/>}/>
+        <Route path="/cadastro-cidade" element={<CadastroCidade/>}/>
+        <Route path="/cadastro-bairro" element={<CadastroBairro/>}/>
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 
