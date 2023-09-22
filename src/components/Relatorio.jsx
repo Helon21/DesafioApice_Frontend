@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Relatorio = () => {
     const [relatorioAnchor, setRelatorioAnchor] = useState(null);
@@ -27,8 +28,8 @@ const Relatorio = () => {
                 open={Boolean(relatorioAnchor)}
                 onClose={handleMenuClose}
             >
-                <MenuItem onClick={handleMenuClose}> Lista de Pessoas </MenuItem>
-                <MenuItem onClick={handleMenuClose}> Lista de Vendas </MenuItem>
+                <MenuItem component={Link} to="relatorio-pessoa" onClick={handleMenuClose}> Lista de Pessoas </MenuItem>
+                <MenuItem component={Link} to="relatorio-venda" onClick={handleMenuClose}> Lista de Vendas </MenuItem>
             </Menu>
         </div>
     );

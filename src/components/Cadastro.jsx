@@ -34,7 +34,7 @@ const Cadastro = () => {
                 <MenuItem component={Link} to="/cadastro-bairro" onClick={handleMenuClose}>Bairro</MenuItem>
                 <MenuItem component={Link} to="/cadastro-cidade" onClick={handleMenuClose}>Cidade</MenuItem>
                 <MenuItem component={Link} to="/cadastro-pessoa" onClick={handleMenuClose}>Pessoa</MenuItem>
-                <MenuItem onClick={handleMenuClose}>Produtos</MenuItem>
+                <MenuItem component={Link} to="/cadastro-produto" onClick={handleMenuClose}>Produtos</MenuItem>
             </Menu>
         </div>
     );
