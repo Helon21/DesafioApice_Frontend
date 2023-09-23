@@ -2,12 +2,14 @@
 import React from 'react';
 import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import style from './CadastroPessoa.module.css'
+import { Link } from "react-router-dom";
+
 
 const CadastroPessoa = () => {
   return (
     <form>
         <div className={style.listagemInclusao}>
-            <Button variant="contained" color="primary">Listar</Button>
+            <Button variant="contained" color="primary" component={Link} to="/listagem-pessoas">Listar</Button>
             <Button variant="contained" color="primary" style={{ marginLeft: '8px' }}>Incluir</Button>
         </div>
         <div className={style.formulario}>

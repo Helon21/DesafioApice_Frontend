@@ -29,7 +29,7 @@ const Movimento = () => {
                 open={Boolean(movimentoAnchor)}
                 onClose={handleMenuClose}
             >
-                <MenuItem component={Link} to="/movimento-venda" onClick={handleMenuClose}>Vendas</MenuItem>
+                <MenuItem component={Link} to="/cadastro-venda" onClick={handleMenuClose}>Vendas</MenuItem>
 
             </Menu>
         </div>
