@@ -33,3 +33,30 @@
     padding: 10px;
     width: 150px; 
 }
+
+.dataFinal{
+    margin-left: 10px;
+
+}
+
+.iconFiltro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+
+
+.valorTotal{
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+
+}
+
+.paperTotalVenda{
+    padding: 10px;
+    width: 150px; 
+
+}

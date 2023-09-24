@@ -1,14 +1,13 @@
 import React from 'react';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Box, Button, Grid, TextField, InputLabel, Select, MenuItem, FormControl, Typography } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Grid, TextField, InputLabel, Select, MenuItem, FormControl, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import style from './RelatorioVenda.module.css'
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+
 
 const RelatorioVenda = () => {
   const itens = [
-    { id: 1, codigo: '001', bairro: 'Bairro A' },
-    { id: 2, codigo: '002', bairro: 'Bairro B' },
+    { id: 1, codigo: '001', pessoa: 'algum nome', totalVenda: '100.50'},
+    { id: 2, codigo: '002', pessoa: 'ajsiak', totalVenda: '200.50'},
     // Adicione mais itens conforme necessário
   ];
   
@@ -19,18 +18,31 @@ const RelatorioVenda = () => {
   return (
     <div>
         <div className={style.listagemInclusao}>
-            <Button variant="contained" color="primary">Listar</Button>
-            <Button variant="contained" color="primary" style={{ marginLeft: '8px' }}>Incluir</Button>
+            <Typography variant="h6">
+                Lista de Vendas
+            </Typography>
         </div>
         <div className={style.inclusaoVenda}>
             <Grid container spacing={2}>
-                <Grid item xs={5} sm={2.5}>
-                    <TextField fullWidth label="Código" />
+                <Grid item xs={8} sm={4}>
+                    <FormControlLabel
+                        control={<Checkbox />}
+                        label="Periodo de Inicio:"
+                        labelPlacement="start"
+                        style={{ marginLeft: '8px' }}
+                    />
+                    <TextField fullWidth />
                 </Grid>
-                <Grid item xs={5} sm={2.5}>
-                    <TextField fullWidth label="Data Venda"/>
+                <Grid item xs={8} sm={4} >
+                    <TextField fullWidth />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={8}>
+                    <FormControlLabel
+                        control={<Checkbox />}
+                        label="Pessoa:"
+                        labelPlacement="start"
+                        style={{ marginLeft: '8px' }}
+                    />
                     <FormControl fullWidth>
                         <InputLabel> Pessoa </InputLabel>
                         <Select>
@@ -39,7 +51,13 @@ const RelatorioVenda = () => {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={8} sm={4}>
+                <Grid item xs={12} sm={8}>
+                    <FormControlLabel
+                        control={<Checkbox />}
+                        label="Produto:"
+                        labelPlacement="start"
+                        style={{ marginLeft: '8px' }}
+                    />
                     <FormControl fullWidth>
                         <InputLabel> Produto </InputLabel>
                         <Select>
@@ -48,71 +66,41 @@ const RelatorioVenda = () => {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={4} sm={2}> 
-                    <TextField fullWidth label="Qtde Venda"/>
-                </Grid>
                 <Grid item xs={4} sm={2}>
-                    <TextField fullWidth label="Vr. Unitário"/>
-                </Grid>
-                <Grid item xs={4} sm={2}>
-                    <TextField fullWidth label="Sub.Total"/>
-                </Grid>
-                <Grid item xs={4} sm={2}>
-                    <div className={style.iconCarrinho}>
+                    <div className={style.iconFiltro}>
                         <IconButton color="primary" size="large">
-                            <ShoppingCartIcon />
+                            <FilterAltIcon />
                         </IconButton>
                     </div>
                 </Grid>
             </Grid>
         </div>
-        <div className={style.carrinhoCompras}>
+        <div>
             <Paper elevation={3} style={{ padding: '20px', width: '95%', margin: '20px auto' }}>
             <TableContainer>
                 <Table>
                 <TableHead>
                     <TableRow>
                     <TableCell>Código</TableCell>
-                    <TableCell>Bairro</TableCell>
-                    <TableCell align='right'>Ações</TableCell>
+                    <TableCell align='center'>Pessoa</TableCell>
+                    <TableCell align='right'>Total Venda</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {itens.map(item => (
                     <TableRow key={item.id}>
                         <TableCell>{item.codigo}</TableCell>
-                        <TableCell>{item.bairro}</TableCell>
-                        <TableCell align="right">
-                        <Box display="flex" justifyContent="flex-end"> {/* Adiciona um espaço entre os botões */}
-                            <IconButton color="primary" size="small">
-                            <EditIcon />
-                            </IconButton>
-                            <IconButton color="secondary" size="small">
-                            <DeleteIcon />
-                            </IconButton>
-                        </Box>
-                        </TableCell>
+                        <TableCell align='center'>{item.pessoa}</TableCell>
+                        <TableCell align="right">{item.totalVenda}</TableCell>
                     </TableRow>
                     ))}
                 </TableBody>
                 </Table>
             </TableContainer>
             </Paper>
+            
         </div>
-        <div className={style.confirmarCancelar}>
-            <Button variant="contained" color="primary" className="confirmar">Confirmar</Button>
-            <Button variant="contained" color="secondary" className="cancelar">Cancelar</Button>
-        </div>
-        <div className={style.valorTotal}>
-            <Paper elevation={3} className={style.paperTotalVenda}>
-                <Typography variant="h6" gutterBottom>
-                    Total Venda
-                </Typography>
-                <Typography variant="h6" gutterBottom>
-                    R${total.tofixed}
-                </Typography>
-            </Paper>
-        </div>
+        
     </div>
   );
 }
