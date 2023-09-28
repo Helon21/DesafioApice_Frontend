@@ -1,17 +1,47 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Box, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import style from './ListagemVendas.module.css'
 import { Link } from 'react-router-dom';
+import VendaService from '../../../services/VendaService';
 
 
 const ListaItens = () => {
-  const itens = [
-    { id: 1, codigo: '001', pessoa: 'Musk', totalVendas: 'R$ 1.000,00'},
-    { id: 2, codigo: '002', pessoa: 'Turing', totalVendas: 'R$ 1.000.000,00'},
-    // Adicione mais itens conforme necessário
-  ];
+  
+    const [vendas, setVendas] = useState([]);
+
+
+    useEffect(() => {
+      const listarVendas = async () => {
+        try {
+          const response = await VendaService.listar();
+          setVendas(response.data);
+
+        } catch (error) {
+          console.error('Erro ao carregar cidades:', error);
+        }
+      }
+
+      listarVendas();
+    }, []);
+
+
+    const handleDelete = async (id) => {
+        try {
+          const response = await VendaService.deletar(id);
+          if (response.status === 200) {
+            // Atualiza a lista de cidades após a exclusão bem-sucedida
+            const updatedVendas = vendas.filter(item => item.id !== id);
+            setVendas(updatedVendas);
+            alert("Venda excluída com sucesso!");
+          } else {
+            alert("Erro ao excluir a Venda!");
+          }
+        } catch (error) {
+          console.error('Erro ao excluir a Venda:', error);
+        }
+    }
 
 
   return (
@@ -32,17 +62,17 @@ const ListaItens = () => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {itens.map(item => (
+                {vendas.map(item => (
                 <TableRow key={item.id}>
                     <TableCell>{item.codigo}</TableCell>
                     <TableCell>{item.pessoa}</TableCell>
                     <TableCell>{item.totalVendas}</TableCell>
                     <TableCell align="right">
-                    <Box display="flex" justifyContent="flex-end"> {/* Adiciona um espaço entre os botões */}
-                        <IconButton color="primary" size="small">
+                    <Box display="flex" justifyContent="flex-end"> 
+                        <IconButton color="primary" size="small" component={Link} to={`/editar-venda/${item.id}`} >
                         <EditIcon />
                         </IconButton>
-                        <IconButton color="secondary" size="small">
+                        <IconButton color="secondary" size="small" onClick={() => handleDelete}>
                         <DeleteIcon />
                         </IconButton>
                     </Box>

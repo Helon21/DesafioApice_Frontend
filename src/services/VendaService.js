@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export class VendaService{
+class VendaService{
     URL = "http://localhost:4000/vendas";
 
     listar(){
@@ -23,3 +23,5 @@ export class VendaService{
         return axios.delete(`${this.URL}/deletar/:${id}`);
     }
 }
+
+export default new VendaService();

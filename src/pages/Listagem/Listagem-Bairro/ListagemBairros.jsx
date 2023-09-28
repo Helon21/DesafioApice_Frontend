@@ -15,7 +15,7 @@ const ListaBairros = () => {
             try {
                 const response = await BairroService.listar();
                 setBairros(response.data);
-                console.log(response.data)
+
             } catch (error) {
                 console.error('Erro ao carregar bairros:', error);
             }
@@ -23,6 +23,22 @@ const ListaBairros = () => {
 
         listarBairros();
     }, []);
+
+    const handleDelete = async (id) => {
+        try {
+          const response = await BairroService.deletar(id);
+          if (response.status === 200) {
+            // Atualiza a lista de cidades após a exclusão bem-sucedida
+            const updatedBairros = bairros.filter(item => item.id !== id);
+            setBairros(updatedBairros);
+            alert("Bairro excluído com sucesso!");
+          } else {
+            alert("Erro ao excluir o Bairro!");
+          }
+        } catch (error) {
+          console.error('Erro ao excluir o bairro:', error);
+        }
+    }
 
   return (
     <div className={style.venda}>
@@ -49,7 +65,7 @@ const ListaBairros = () => {
                         <IconButton color="primary" size="small" component={Link} to={`/editar-bairro/${item.id}`}>
                             <EditIcon />
                         </IconButton>
-                        <IconButton color="secondary" size="small">
+                        <IconButton color="secondary" size="small" onClick={() => handleDelete(item.id)}>
                             <DeleteIcon />
                         </IconButton>
                     </Box>

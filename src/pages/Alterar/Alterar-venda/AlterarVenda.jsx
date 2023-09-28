@@ -4,10 +4,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import style from './CadastroVendas.module.css'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import VendaService from '../../../services/VendaService';
 
-const CadastroVenda = () => {
+const AlterarVenda = () => {
+
+    const {id} = useParams();
     const [codigo, setCodigo] = useState("");
     const [dataVenda, setDataVenda] = useState("");
     const [quantidade, setQuantidade] = useState("");
@@ -16,18 +18,15 @@ const CadastroVenda = () => {
     const [vendas, setVendas] = useState([]);
 
     
-
     const handleConfirmar = () => {
-        const vendas = { codigo, dataVenda, quantidade, vr_venda, subtotal };
-        VendaService.cadastrar(vendas)
-            .then(response => {
-                response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao realizar o cadastro!");
-                // Limpa os campos após o cadastro
-                
-            })
-            .catch(error => {
-                console.error('Erro ao cadastrar a venda:', error);
-            });
+
+        const produtoAtualizado = { codigo, dataVenda, quantidade, vr_venda, subtotal };
+        
+        VendaService.atualizar(id, produtoAtualizado)
+        .then(response => {
+            response.status === 201 ? alert("Cadastro atualizado com sucesso!") : alert("Erro ao atualizar o cadastro!");
+        })
+
     }
     
 
@@ -139,4 +138,4 @@ const CadastroVenda = () => {
 }
 
 
-export default CadastroVenda;
+export default AlterarVenda;

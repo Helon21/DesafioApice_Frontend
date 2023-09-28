@@ -10,14 +10,14 @@ const ListaCidades = () => {
 
 
     const [cidades, setCidades] = useState([]);
-    console.log(cidades)
+
 
     useEffect(() => {
       const listarCidades = async () => {
         try {
           const response = await CidadeService.listar();
           setCidades(response.data);
-          console.log(response.data)
+
         } catch (error) {
           console.error('Erro ao carregar cidades:', error);
         }
@@ -25,6 +25,23 @@ const ListaCidades = () => {
 
       listarCidades();
     }, []);
+    
+
+    const handleDelete = async (id) => {
+      try {
+        const response = await CidadeService.deletar(id);
+        if (response.status === 200) {
+          // Atualiza a lista de cidades após a exclusão bem-sucedida
+          const updatedCidades = cidades.filter(item => item.id !== id);
+          setCidades(updatedCidades);
+          alert("Cidade excluída com sucesso!");
+        } else {
+          alert("Erro ao excluir a cidade!");
+        }
+      } catch (error) {
+        console.error('Erro ao excluir a cidade:', error);
+      }
+    }
 
     return (
         <div className={style.venda}>
@@ -54,7 +71,7 @@ const ListaCidades = () => {
                             <IconButton color="primary" size="small" component={Link} to={`/editar-cidade/${item.id}`}>
                               <EditIcon />
                             </IconButton>
-                            <IconButton color="secondary" size="small">
+                            <IconButton color="secondary" size="small" onClick={() => handleDelete(item.id)}>
                             <DeleteIcon/>
                             </IconButton>
                         </Box>

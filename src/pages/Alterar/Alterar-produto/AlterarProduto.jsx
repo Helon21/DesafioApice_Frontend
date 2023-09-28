@@ -1,36 +1,32 @@
 import React, {useState} from "react";
 import { TextField, Button, Grid } from '@mui/material';
-import style from './CadastroProduto.module.css'
-import { Link } from "react-router-dom";
+import style from './AlterarCidade.module.css'
+import { Link, useParams } from "react-router-dom";
 import ProdutoService from "../../../services/ProdutoService";
 
-const CadastroProduto = () => {
 
-    const [codigo, setCodigo] = useState("");
+const AlterarProduto = () => {
+    
+    const {id} = useParams();
+    const [codigo, setCodigo] = useState(""); 
     const [nome, setNome] = useState("");
-    const [vr_venda, setVrVenda] = useState("");
+    const [vr_venda, setVrVenda] = useState(""); 
 
     const handleConfirmar = () => {
-        const produto = { codigo, nome, vr_venda };
-        ProdutoService.cadastrar(produto)
-            .then(response => {
-                response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao realizar o cadastro!");
-                // Limpa os campos após o cadastro
-                setCodigo("");
-                setNome("");
-                setVrVenda("");
-                
-            })
-            .catch(error => {
-                console.error('Erro ao cadastrar o Produto:', error);
-            });
+
+        const produtoAtualizado = { codigo, nome, vr_venda };
+        
+        ProdutoService.atualizar(id, produtoAtualizado)
+        .then(response => {
+            response.status === 201 ? alert("Cadastro atualizado com sucesso!") : alert("Erro ao atualizar o cadastro!");
+        })
+
     }
     
     return(
         <form>
             <div className={style.listagemInclusao}>
                 <Button variant="contained" color="primary" component={Link} to="/listagem-produtos" >Listar</Button>
-                <Button variant="contained" color="primary" style={{ marginLeft: '8px' }}>Incluir</Button>
             </div>
             <div className={style.formulario}>
                 <Grid container spacing={2}>
@@ -55,4 +51,4 @@ const CadastroProduto = () => {
     )
 }
 
-export default CadastroProduto;
+export default AlterarProduto;

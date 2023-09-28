@@ -9,14 +9,14 @@ import PessoaService from '../../../services/PessoaService';
 
 const ListaPessoas = () => {
     const [pessoas, setPessoas] = useState([]);
-    console.log(pessoas)
+
 
     useEffect(() => {
       const listarPessoas = async () => {
         try {
           const response = await PessoaService.listar();
           setPessoas(response.data);
-          console.log(response.data)
+
         } catch (error) {
           console.error('Erro ao carregar cidades:', error);
         }
@@ -24,6 +24,22 @@ const ListaPessoas = () => {
 
       listarPessoas();
     }, []);
+
+    const handleDelete = async (id) => {
+      try {
+        const response = await PessoaService.deletar(id);
+        if (response.status === 200) {
+          // Atualiza a lista de cidades após a exclusão bem-sucedida
+          const updatedPessoas = pessoas.filter(item => item.id !== id);
+          setPessoas(updatedPessoas);
+          alert("Pessoa excluída com sucesso!");
+        } else {
+          alert("Erro ao excluir a pessoa!");
+        }
+      } catch (error) {
+        console.error('Erro ao excluir a pessoa:', error);
+      }
+    }
 
   return (
     <div className={style.venda}>
@@ -55,7 +71,7 @@ const ListaPessoas = () => {
                         <IconButton color="primary" size="small" component={Link} to={`/editar-pessoa/${item.id}`} >
                             <EditIcon />
                         </IconButton>
-                        <IconButton color="secondary" size="small">
+                        <IconButton color="secondary" size="small" onClick={() => handleDelete(item.id)}>
                             <DeleteIcon />
                         </IconButton>
                     </Box>

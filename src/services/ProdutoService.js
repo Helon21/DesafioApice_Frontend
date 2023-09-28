@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export class ProdutoService{
-    URL = "http://localhost:4000/produtos";
+class ProdutoService{
+    URL = "http://localhost:4000/api/produtos";
 
     listar(){
         return axios.get(`${this.URL}/listar`);
@@ -20,3 +20,5 @@ export class ProdutoService{
     }
 
 }
+
+export default new ProdutoService();

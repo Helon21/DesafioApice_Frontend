@@ -18,6 +18,8 @@ import CadastroVenda from './pages/Cadastros/Cadastro-vendas/CadastroVendas';
 import AlterarCidade from './pages/Alterar/Alterar-cidade/AlterarCidade';
 import AlterarBairro from './pages/Alterar/Alterar-bairro/AlterarBairro';
 import AlterarPessoa from './pages/Alterar/Alterar-pessoa/AlterarPessoa';
+import AlterarVenda from './pages/Alterar/Alterar-venda/AlterarVenda';
+import AlterarProduto from './pages/Alterar/Alterar-produto/alterarProduto';
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
         <Route path="/editar-cidade/:id" element={<AlterarCidade/>}/>
         <Route path="/editar-bairro/:id" element={<AlterarBairro/>}/>
         <Route path="/editar-pessoa/:id" element={<AlterarPessoa/>}/>
+        <Route path="/editar-produto/:id" element={<AlterarProduto/>}/>
+        <Route path="/editar-venda/:id" element={<AlterarVenda/>}/>
       </Routes>
     </BrowserRouter>
 

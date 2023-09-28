@@ -14,7 +14,7 @@ const CadastroCidade = () => {
         const cidade = { codigo, nome, sigla };
         CidadeService.cadastrar(cidade)
             .then(response => {
-                alert("Cidade cadastrada com sucesso!");
+                response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao realizar o cadastro!");
                 // Limpa os campos após o cadastro
                 setCodigo("");
                 setNome("");
@@ -22,7 +22,6 @@ const CadastroCidade = () => {
             })
             .catch(error => {
                 console.error('Erro ao cadastrar cidade:', error);
-                alert("Erro ao cadastrar cidade. Verifique o console para mais detalhes.");
             });
     }
 
