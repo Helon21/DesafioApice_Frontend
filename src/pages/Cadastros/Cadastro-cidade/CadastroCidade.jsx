@@ -1,9 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import { TextField, Button, Grid } from '@mui/material';
 import style from './CadastroCidade.module.css'
 import { Link } from "react-router-dom";
+import CidadeService from "../../../services/CidadeService";
 
 const CadastroCidade = () => {
+
+    const [codigo, setCodigo] = useState("");
+    const [nome, setNome] = useState("");
+    const [sigla, setSiglaUF] = useState("");
+
+    const handleConfirmar = () => {
+        const cidade = { codigo, nome, sigla };
+        CidadeService.cadastrar(cidade)
+            .then(response => {
+                alert("Cidade cadastrada com sucesso!");
+                // Limpa os campos após o cadastro
+                setCodigo("");
+                setNome("");
+                setSiglaUF("");
+            })
+            .catch(error => {
+                console.error('Erro ao cadastrar cidade:', error);
+                alert("Erro ao cadastrar cidade. Verifique o console para mais detalhes.");
+            });
+    }
+
+
     return(
         <form>
             <div className={style.listagemInclusao}>
@@ -13,17 +36,17 @@ const CadastroCidade = () => {
             <div className={style.formulario}>
                 <Grid container spacing={2}>
                     <Grid item xs={8} sm={4}>
-                        <TextField fullWidth label="Código" />
+                        <TextField fullWidth label="Código" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
                     </Grid>
                     <Grid item xs={8} sm={4}>
-                        <TextField fullWidth label="Cidade" />
+                        <TextField fullWidth label="Cidade" value={nome} onChange={(e) => setNome(e.target.value)}/>
                     </Grid>
                     <Grid item xs={8} sm={4}>
-                        <TextField fullWidth label="Sigla UF" />
+                        <TextField fullWidth label="Sigla UF" value={sigla} onChange={(e) => setSiglaUF(e.target.value)}/>
                     </Grid>
                     <div className={style.confirmarExcluir}>
                         <Grid item xs={12} >
-                            <Button variant="contained" color="primary">Confirmar</Button>
+                            <Button variant="contained" color="primary" onClick={handleConfirmar}>Confirmar</Button>
                             <Button variant="contained" color="secondary">Cancelar</Button>
                         </Grid>
                     </div>

@@ -1,11 +1,22 @@
 // CadastroForm.jsx
-import React from 'react';
+import React, {useState} from 'react';
 import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import style from './CadastroPessoa.module.css'
 import { Link } from "react-router-dom";
 
 
 const CadastroPessoa = () => {
+
+    const [codigo, setCodigo] = useState("");
+    const [nome, setNome] = useState("");
+    const [telefone, setTelefone] = useState("");
+    const [email, setEmail] = useState("");
+    const [cep, setCep] = useState("");
+    const [numero, setNumero] = useState("");
+    const [endereco, setEndereco] = useState("");
+    const [complemento, setComplemento] = useState("");
+
+
   return (
     <form>
         <div className={style.listagemInclusao}>
@@ -15,22 +26,22 @@ const CadastroPessoa = () => {
         <div className={style.formulario}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="Código" />
+                    <TextField fullWidth label="Código" value={codigo} onChange={(e) => setCodigo(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="Nome" />
+                    <TextField fullWidth label="Nome" value={nome} onChange={(e) => setNome(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="Telefone" />
+                    <TextField fullWidth label="Telefone" value={telefone} onChange={(e) => setTelefone(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="Email" />
+                    <TextField fullWidth label="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="CEP" />
+                    <TextField fullWidth label="CEP" value={cep} onChange={(e) => setCep(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="Número" />
+                    <TextField fullWidth label="Número" value={numero} onChange={(e) => setNumero(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12}>
                     <TextField fullWidth label="Endereço" />

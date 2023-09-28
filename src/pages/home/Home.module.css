@@ -1,3 +1,16 @@
 .homepage{
-    height: 650px;
+    height: 550px;
 }
+@media screen and (max-width: 600px) {
+    .Toolbar {
+      flex-direction: column; /* Empilha os itens verticalmente em telas menores */
+      align-items: center; /* Centraliza os itens na tela */
+    }
+  
+    .menu-item {
+      margin-bottom: 10px; /* Adicione um espaço entre os itens de menu */
+    }
+}
+  
+  
+  

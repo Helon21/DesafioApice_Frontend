@@ -15,6 +15,9 @@ import ListaCidades from './pages/Listagem/Listagem-Cidade/ListagemCidade';
 import ListaPessoas from './pages/Listagem/Listagem-Pessoa/ListagemPessoas';
 import ListaProdutos from './pages/Listagem/Listagem-Produto/ListagemProduto';
 import CadastroVenda from './pages/Cadastros/Cadastro-vendas/CadastroVendas';
+import AlterarCidade from './pages/Alterar/Alterar-cidade/AlterarCidade';
+import AlterarBairro from './pages/Alterar/Alterar-bairro/AlterarBairro';
+import AlterarPessoa from './pages/Alterar/Alterar-pessoa/AlterarPessoa';
 
 
 function App() {
@@ -33,7 +36,10 @@ function App() {
         <Route path="/listagem-cidades" element={<ListaCidades/>}/>
         <Route path="/listagem-pessoas" element={<ListaPessoas/>}/> 
         <Route path="/listagem-produtos" element={<ListaProdutos/>}/>
-        <Route path="/cadastro-venda" element={<CadastroVenda/>}/>   
+        <Route path="/cadastro-venda" element={<CadastroVenda/>}/>
+        <Route path="/editar-cidade/:id" element={<AlterarCidade/>}/>
+        <Route path="/editar-bairro/:id" element={<AlterarBairro/>}/>
+        <Route path="/editar-pessoa/:id" element={<AlterarPessoa/>}/>
       </Routes>
     </BrowserRouter>
 
