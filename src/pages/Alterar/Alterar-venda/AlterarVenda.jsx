@@ -3,7 +3,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import style from './CadastroVendas.module.css'
+import style from './AlterarVenda.module.css'
 import { Link, useParams } from 'react-router-dom';
 import VendaService from '../../../services/VendaService';
 

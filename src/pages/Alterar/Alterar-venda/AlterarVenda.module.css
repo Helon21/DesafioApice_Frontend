@@ -1,0 +1,35 @@
+.listagemInclusao{
+    margin-top: 10px;
+    margin-left: 13px;
+}
+
+.inclusaoVenda{
+    margin-top: 50px;
+    margin-left: 12px;
+}
+
+.carrinhoCompras{
+    margin-top: 50px;
+}
+
+.iconCarrinho{
+    display: flex;
+    align-items: center;
+}
+
+.confirmarCancelar{
+    margin-top: 30px;
+    justify-content: space-between;
+    margin-left: 12px;
+}
+
+.valorTotal{
+    position: absolute;
+    bottom: 16px;
+    right: 16px;  
+}
+
+.paperTotalVenda{
+    padding: 10px;
+    width: 150px; 
+}

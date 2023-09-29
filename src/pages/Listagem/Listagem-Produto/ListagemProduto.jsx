@@ -45,7 +45,7 @@ const ListaProdutos = () => {
         <div className={style.venda}>
             <div className={style.listagemInclusao}>
                 <Button variant="contained" color="primary" >Listar</Button>
-                <Button variant="contained" color="primary" component={Link} to="/cadastro-pessoa" style={{ marginLeft: '8px' }}>Incluir</Button>
+                <Button variant="contained" color="primary" component={Link} to="/cadastro-produto" style={{ marginLeft: '8px' }}>Incluir</Button>
             </div>
             <Paper elevation={3} style={{ padding: '20px', width: '95%', margin: '20px auto' }}>
             <TableContainer>

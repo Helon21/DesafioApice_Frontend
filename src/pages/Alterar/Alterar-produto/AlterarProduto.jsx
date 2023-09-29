@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { TextField, Button, Grid } from '@mui/material';
-import style from './AlterarCidade.module.css'
+import style from './AlterarProduto.module.css'
 import { Link, useParams } from "react-router-dom";
 import ProdutoService from "../../../services/ProdutoService";
 

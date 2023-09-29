@@ -25,7 +25,7 @@ const AlterarCidade = () => {
     return(
         <form>
             <div className={style.listagemInclusao}>
-                <Button variant="contained" color="primary" component={Link} to="/listagem-bairros">Listar</Button>
+                <Button variant="contained" color="primary" component={Link} to="/listagem-cidades">Listar</Button>
             </div>
             <div className={style.formulario}>
                 <Grid container spacing={2}>

@@ -19,7 +19,7 @@ import AlterarCidade from './pages/Alterar/Alterar-cidade/AlterarCidade';
 import AlterarBairro from './pages/Alterar/Alterar-bairro/AlterarBairro';
 import AlterarPessoa from './pages/Alterar/Alterar-pessoa/AlterarPessoa';
 import AlterarVenda from './pages/Alterar/Alterar-venda/AlterarVenda';
-import AlterarProduto from './pages/Alterar/Alterar-produto/alterarProduto';
+import AlterarProduto from './pages/Alterar/Alterar-produto/AlterarProduto';
 
 
 function App() {

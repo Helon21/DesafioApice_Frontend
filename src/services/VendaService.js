@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class VendaService{
-    URL = "http://localhost:4000/vendas";
+    URL = "http://localhost:4000/venda";
 
     listar(){
         return axios.get(`${this.URL}/listar`);
