@@ -12,11 +12,11 @@ class ProdutoService{
     };
 
     alterar(id, produto){
-        return axios.put(`${this.URL}/atualizar/:${id}`, produto);
+        return axios.put(`${this.URL}/atualizar/${id}`, produto);
     };
 
     deletar(id){
-        return axios.delete(`${this.URL}/deletar/:${id}`);
+        return axios.delete(`${this.URL}/deletar/${id}`);
     }
 
 }

@@ -22,11 +22,11 @@ class PessoaService {
     };
 
     alterar(id, pessoa){
-        return axios.put(`${this.URL}/atualizar/:${id}`, pessoa);
+        return axios.put(`${this.URL}/atualizar/${id}`, pessoa);
     };
 
     deletar(id){
-        return axios.delete(`${this.URL}/deletar/:${id}`);
+        return axios.delete(`${this.URL}/deletar/${id}`);
     }
 };
 

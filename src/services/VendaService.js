@@ -16,11 +16,11 @@ class VendaService{
     };
 
     atualizarVenda(id, venda){
-        return axios.put(`${this.URL}/atualizar/:${id}`, venda);
+        return axios.put(`${this.URL}/atualizar/${id}`, venda);
     };
 
     deletar(id){
-        return axios.delete(`${this.URL}/deletar/:${id}`);
+        return axios.delete(`${this.URL}/deletar/${id}`);
     }
 }
 

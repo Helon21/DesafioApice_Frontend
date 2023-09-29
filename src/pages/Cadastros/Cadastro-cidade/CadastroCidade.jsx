@@ -11,8 +11,8 @@ const CadastroCidade = () => {
     const [sigla, setSiglaUF] = useState("");
 
     const handleConfirmar = () => {
-        const cidade = { codigo, nome, sigla };
-        CidadeService.cadastrar(cidade)
+        const cidades = { codigo, nome, sigla };
+        CidadeService.cadastrar(cidades)
             .then(response => {
                 response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao realizar o cadastro!");
                 // Limpa os campos após o cadastro

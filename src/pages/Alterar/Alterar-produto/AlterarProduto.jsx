@@ -16,7 +16,7 @@ const AlterarProduto = () => {
 
         const produtoAtualizado = { codigo, nome, vr_venda };
         
-        ProdutoService.atualizar(id, produtoAtualizado)
+        ProdutoService.alterar(id, produtoAtualizado)
         .then(response => {
             response.status === 201 ? alert("Cadastro atualizado com sucesso!") : alert("Erro ao atualizar o cadastro!");
         })

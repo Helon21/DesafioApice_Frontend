@@ -69,7 +69,7 @@ const ListaProdutos = () => {
                             <IconButton color="primary" size="small" component={Link} to={`/editar-produto/${item.id}`}>
                             <EditIcon />
                             </IconButton>
-                            <IconButton color="secondary" size="small" onClick={() => handleDelete}>
+                            <IconButton color="secondary" size="small" onClick={() => handleDelete(item.id)}>
                             <DeleteIcon />
                             </IconButton>
                         </Box>

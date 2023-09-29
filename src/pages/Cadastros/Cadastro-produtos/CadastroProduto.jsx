@@ -4,6 +4,7 @@ import style from './CadastroProduto.module.css'
 import { Link } from "react-router-dom";
 import ProdutoService from "../../../services/ProdutoService";
 
+
 const CadastroProduto = () => {
 
     const [codigo, setCodigo] = useState("");
@@ -11,8 +12,8 @@ const CadastroProduto = () => {
     const [vr_venda, setVrVenda] = useState("");
 
     const handleConfirmar = () => {
-        const produto = { codigo, nome, vr_venda };
-        ProdutoService.cadastrar(produto)
+        const produtos = { codigo, nome, vr_venda };
+        ProdutoService.cadastrar(produtos)
             .then(response => {
                 response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao realizar o cadastro!");
                 // Limpa os campos após o cadastro

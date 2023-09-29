@@ -1,9 +1,12 @@
 // CadastroForm.jsx
-import React, {useState} from 'react';
-import { TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { TextField, Button, Grid, Autocomplete } from '@mui/material';
 import style from './CadastroPessoa.module.css'
 import { Link } from "react-router-dom";
 import PessoaService from '../../../services/PessoaService';
+import BairroService from '../../../services/BairroService';
+import CidadeService from '../../../services/CidadeService';
+
 
 
 const CadastroPessoa = () => {
@@ -16,27 +19,68 @@ const CadastroPessoa = () => {
     const [numero, setNumero] = useState("");
     const [endereco, setEndereco] = useState("");
     const [complemento, setComplemento] = useState("");
+    const [bairro, setBairro] = useState(""); 
+    const [cidade, setCidade] = useState("");
+    //const [cidade_id, setCidade_id] = useState(null); 
+    //const [bairro_id, setBairro_id] = useState(null);
+    
+    const [listaCidades, setListaCidades] = useState([]);
+    const [dadosCarregadosCidade, setDadosCarregadosCidade] = useState(false);
+   
+    const [listaBairros, setListaBairros] = useState([]);
+    const [dadosCarregadosBairro, setDadosCarregadosBairro] = useState(false);
+
 
     const handleConfirmar = () => {
-        const pessoa = { codigo, nome, telefone, email, cep, numero, endereco, complemento };
-        PessoaService.cadastrar(pessoa)
+      
+        const pessoas = { codigo, nome, cidade, bairro, cep, endereco, numero, complemento, telefone, email };
+
+        PessoaService.cadastrar(pessoas)
             .then(response => {
                 response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao realizar o cadastro!");
                 // Limpa os campos após o cadastro
                 setCodigo("");
                 setNome("");
+                setCidade("");
+                setBairro("");
+                setCep("");
+                setEndereco("");
+                setNumero("");
+                setComplemento("");
                 setTelefone("");
                 setEmail("");
-                setCep("");
-                setNumero("");
-                setEndereco("");
-                setComplemento("");
             })
             .catch(error => {
                 console.error('Erro ao cadastrar Pessoa:', error);
             });
     }
     
+    useEffect(() => {
+        if (!dadosCarregadosCidade) {
+            CidadeService.listar() 
+                .then(response => {
+                    setListaCidades(response.data);
+                    setDadosCarregadosCidade(true); 
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar dados de Pessoa:', error);
+                });
+        }
+    }, [dadosCarregadosCidade]);
+
+    useEffect(() => {
+        if(!dadosCarregadosBairro){
+            BairroService.listar()
+                .then(response => {
+                    setListaBairros(response.data);
+                    setDadosCarregadosBairro(true);
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar dados de Bairro:', error);
+                });
+        }
+    })
+
 
     return (
         <form>
@@ -71,22 +115,30 @@ const CadastroPessoa = () => {
                         <TextField fullWidth label="Complemento" value={complemento} onChange={(e) => setComplemento(e.target.value)}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <FormControl fullWidth>
-                            <InputLabel>Cidade</InputLabel>
-                            <Select>
-                                <MenuItem value="cidade1">Cidade 1</MenuItem>
-                                <MenuItem value="cidade2">Cidade 2</MenuItem>
-                            </Select>
-                        </FormControl>
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-pessoa"
+                            options={listaCidades}
+                            getOptionLabel={(option) => option.nome}
+                            onChange={(e, newValue) => {
+                                console.log(newValue); // Verifique se está imprimindo a cidade corretamente
+                                newValue && setCidade(newValue.nome) // Correção aqui
+                            }}
+                            renderInput={(params) => <TextField {...params} label="Pessoa" value={cidade} />}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <FormControl fullWidth>
-                            <InputLabel>Bairro</InputLabel>
-                            <Select>
-                                <MenuItem value="bairro1">Bairro 1</MenuItem>
-                                <MenuItem value="bairro2">Bairro 2</MenuItem>
-                            </Select>
-                        </FormControl>
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-bairro"
+                            options={listaBairros}
+                            getOptionLabel={(option) => option.nome}
+                            onChange={(e, newValue) => {
+                                console.log(newValue); // Verifique se está imprimindo o bairro corretamente
+                                newValue && setBairro(newValue.nome)
+                            }}
+                            renderInput={(params) => <TextField {...params} label="Bairro" value={bairro} />}
+                        />
                     </Grid>
                     <div className={style.confirmarExcluir}>
                         <Grid item xs={12} >
