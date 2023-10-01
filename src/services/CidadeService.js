@@ -7,6 +7,10 @@ class CidadeService {
     listar() {
         return axios.get(`${this.URL}/listar`);
     }
+    
+    listarPorId(id){
+        return axios.get(`${this.URL}/listar/${id}`)
+    }
 
     cadastrar(cidade) {
         return axios.post(`${this.URL}/cadastrar`, cidade);

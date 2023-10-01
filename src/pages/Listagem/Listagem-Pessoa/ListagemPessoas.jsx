@@ -5,16 +5,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import style from './ListagemPessoas.module.css'
 import { Link } from 'react-router-dom';
 import PessoaService from '../../../services/PessoaService';
+import CidadeService from '../../../services/CidadeService';
 
 
 const ListaPessoas = () => {
     const [pessoas, setPessoas] = useState([]);
-
+    const [cidades, setCidades] = useState([]);
 
     useEffect(() => {
       const listarPessoas = async () => {
         try {
           const response = await PessoaService.listar();
+          
           setPessoas(response.data);
 
         } catch (error) {
@@ -24,6 +26,22 @@ const ListaPessoas = () => {
 
       listarPessoas();
     }, []);
+
+    
+    useEffect(() => {
+      const listarCidades = async () => {
+          try {
+              const response = await CidadeService.listar(); // Assumindo que existe um método "listar" no seu serviço de cidades.
+              setCidades(response.data);
+          } catch (error) {
+              console.error('Erro ao carregar cidades:', error);
+          }
+      }
+
+      listarCidades();
+  }, []);
+
+
 
     const handleDelete = async (id) => {
       try {
@@ -64,7 +82,7 @@ const ListaPessoas = () => {
                 <TableRow key={item.id}>
                     <TableCell>{item.codigo}</TableCell>
                     <TableCell>{item.nome}</TableCell>
-                    <TableCell>{item.cidade}</TableCell>
+                    <TableCell>{cidades.find(cidade => cidade.id === item.cidade_id)?.nome}</TableCell>
                     <TableCell>{item.telefone}</TableCell>
                     <TableCell align="right">
                     <Box display="flex" justifyContent="flex-end"> 
@@ -83,7 +101,9 @@ const ListaPessoas = () => {
         </TableContainer>
         </Paper>
     </div>
+
   );
+
 }
 
 export default ListaPessoas;

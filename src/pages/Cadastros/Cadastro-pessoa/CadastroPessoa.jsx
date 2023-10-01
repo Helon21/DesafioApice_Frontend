@@ -19,11 +19,9 @@ const CadastroPessoa = () => {
     const [numero, setNumero] = useState("");
     const [endereco, setEndereco] = useState("");
     const [complemento, setComplemento] = useState("");
-    const [bairro, setBairro] = useState(""); 
-    const [cidade, setCidade] = useState("");
-    //const [cidade_id, setCidade_id] = useState(null); 
-    //const [bairro_id, setBairro_id] = useState(null);
-    
+    const [cidade_id, setCidade_id] = useState(null); 
+    const [bairro_id, setBairro_id] = useState(null);
+
     const [listaCidades, setListaCidades] = useState([]);
     const [dadosCarregadosCidade, setDadosCarregadosCidade] = useState(false);
    
@@ -33,7 +31,9 @@ const CadastroPessoa = () => {
 
     const handleConfirmar = () => {
       
-        const pessoas = { codigo, nome, cidade, bairro, cep, endereco, numero, complemento, telefone, email };
+        const pessoas = { codigo, nome, cidade_id, bairro_id, cep, endereco, numero, complemento, telefone, email };
+
+        console.log(cidade_id, bairro_id)
 
         PessoaService.cadastrar(pessoas)
             .then(response => {
@@ -41,8 +41,8 @@ const CadastroPessoa = () => {
                 // Limpa os campos após o cadastro
                 setCodigo("");
                 setNome("");
-                setCidade("");
-                setBairro("");
+                setCidade_id("");
+                setBairro_id("");
                 setCep("");
                 setEndereco("");
                 setNumero("");
@@ -79,7 +79,7 @@ const CadastroPessoa = () => {
                     console.error('Erro ao carregar dados de Bairro:', error);
                 });
         }
-    })
+    });
 
 
     return (
@@ -122,9 +122,9 @@ const CadastroPessoa = () => {
                             getOptionLabel={(option) => option.nome}
                             onChange={(e, newValue) => {
                                 console.log(newValue); // Verifique se está imprimindo a cidade corretamente
-                                newValue && setCidade(newValue.nome) // Correção aqui
+                                newValue && setCidade_id(newValue.id); // Correção aqui
                             }}
-                            renderInput={(params) => <TextField {...params} label="Pessoa" value={cidade} />}
+                            renderInput={(params) => <TextField {...params} label="Cidade" value={cidade_id} />}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -134,10 +134,10 @@ const CadastroPessoa = () => {
                             options={listaBairros}
                             getOptionLabel={(option) => option.nome}
                             onChange={(e, newValue) => {
-                                console.log(newValue); // Verifique se está imprimindo o bairro corretamente
-                                newValue && setBairro(newValue.nome)
+                                console.log(newValue); // Verifique se está imprimindo a cidade corretamente
+                                newValue && setBairro_id(newValue.id); // Correção aqui
                             }}
-                            renderInput={(params) => <TextField {...params} label="Bairro" value={bairro} />}
+                            renderInput={(params) => <TextField {...params} label="Bairro" value={bairro_id} />}
                         />
                     </Grid>
                     <div className={style.confirmarExcluir}>
