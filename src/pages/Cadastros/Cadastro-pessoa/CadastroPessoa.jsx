@@ -15,7 +15,7 @@ const CadastroPessoa = () => {
     const [nome, setNome] = useState("");
     const [telefone, setTelefone] = useState("");
     const [email, setEmail] = useState("");
-    const [cep, setCep] = useState("");
+    const [CEP, setCEP] = useState("");
     const [numero, setNumero] = useState("");
     const [endereco, setEndereco] = useState("");
     const [complemento, setComplemento] = useState("");
@@ -28,10 +28,18 @@ const CadastroPessoa = () => {
     const [listaBairros, setListaBairros] = useState([]);
     const [dadosCarregadosBairro, setDadosCarregadosBairro] = useState(false);
 
+    const handleCEPChange = (e) => {
+        let cepDigitado = (e.target.value);
+        cepDigitado = cepDigitado.replace(/\D/g, '');
+        cepDigitado = cepDigitado.substring(0, 8);
+        cepDigitado = cepDigitado.slice(0, 5) + '-' + cepDigitado.slice(5);
+        setCEP(cepDigitado)
+    };
+
 
     const handleConfirmar = () => {
       
-        const pessoas = { codigo, nome, cidade_id, bairro_id, cep, endereco, numero, complemento, telefone, email };
+        const pessoas = { codigo, nome, cidade_id, bairro_id, CEP, endereco, numero, complemento, telefone, email };
 
         console.log(cidade_id, bairro_id)
 
@@ -43,7 +51,7 @@ const CadastroPessoa = () => {
                 setNome("");
                 setCidade_id("");
                 setBairro_id("");
-                setCep("");
+                setCEP("");
                 setEndereco("");
                 setNumero("");
                 setComplemento("");
@@ -103,7 +111,7 @@ const CadastroPessoa = () => {
                         <TextField fullWidth label="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField fullWidth label="CEP" value={cep} onChange={(e) => setCep(e.target.value)}/>
+                        <TextField fullWidth label="CEP" value={CEP} onChange={handleCEPChange}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField fullWidth label="Número" value={numero} onChange={(e) => setNumero(e.target.value)}/>
